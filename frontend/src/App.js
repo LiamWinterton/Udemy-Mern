@@ -8,6 +8,7 @@ import {
 
 import Users from "./pages/users"
 import Places from "./pages/places"
+import UserPlaces from "./pages/places/UserPlaces"
 
 import MainNavigation from "./components/global/Navigation/MainNavigation"
 
@@ -19,6 +20,7 @@ const App = () => {
 				<Switch>
 					<Route path="/" exact component={Users} />
 					<Route path="/places/new" exact component={Places} />
+					<Route path="/:userId/places" exact component={UserPlaces} />
 					<Redirect to="/" />
 				</Switch>
 			</main>
