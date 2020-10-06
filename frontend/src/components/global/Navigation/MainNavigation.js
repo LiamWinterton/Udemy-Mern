@@ -15,16 +15,12 @@ const MainNavigation = () => {
 
 	return (
 		<>
-		{drawerisOpen && (
-			<>
-			<Backdrop onClick={toggleDrawer} />
-			<SideDrawer>
-				<nav className="main-navigation__drawer-nav">
-					<NavLinks />
-				</nav>
-			</SideDrawer>
-			</>
-		)}
+		{drawerisOpen && <Backdrop onClick={toggleDrawer} />}
+		<SideDrawer show={drawerisOpen}>
+			<nav className="main-navigation__drawer-nav">
+				<NavLinks />
+			</nav>
+		</SideDrawer>
 		<MainHeader>
 			<button className="main-navigation__menu-btn" onClick={toggleDrawer}>
 				<span />
