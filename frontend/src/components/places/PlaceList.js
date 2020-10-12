@@ -28,6 +28,7 @@ const PlaceList = props => {
 						address={item.address}
 						creatorID={item.creatorID}
 						coordinates={item.location}
+						embedSrc={item.embedSrc}
 					/>
 				)
 			})}

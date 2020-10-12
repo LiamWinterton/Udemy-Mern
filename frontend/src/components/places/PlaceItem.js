@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Card from '../global/UIElements/Card'
 import Button from '../global/FormElements/Button'
 import Modal from '../global/UIElements/Modal'
+import Map from '../global/UIElements/Map'
 
 import "./PlaceItem.css"
 
@@ -22,7 +23,9 @@ const PlaceItem = props => {
 			footerClass="place-item__modal-actions"
 			footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
 		>
-			<div className="map-container">Google map</div>
+			<div className="map-container">
+				<Map src={props.embedSrc} title={props.address}></Map>
+			</div>
 		</Modal>
 		<li className="place-item">
 			<Card className="place-item__content">
