@@ -1,4 +1,4 @@
-import React, { useReducer } from "react"
+import React, { useReducer, useEffect } from "react"
 
 import { validate } from "../../../util/validators"
 
@@ -26,6 +26,9 @@ const Input = props => {
 	// Manage State
 	const [inputState, dispatch] = useReducer(inputReducer, { value: "", isValid: false, isTouched: false })
 
+	const { id, type, placeholder, rows, onInput } = props
+	const { value, isValid, isTouched } = inputState
+
 	// Dispatch our updated state when the input is changed
 	// HINT: This is reacts hook version of redux (Not sure if people use that anymore)
 	const changeHandler = event => {
@@ -42,27 +45,32 @@ const Input = props => {
 		})
 	}
 
+	// If any of (id, value, isValid) change, run onInput to report back to form to manage whole form state
+	useEffect(() => {
+		onInput(id, value, isValid)
+	}, [id, value, isValid, onInput])
+
 	const element = props.element === "input" ?
 		(
 			<input
-				id={props.id}
-				type={props.type}
-				placeholder={props.placeholder}
+				id={id}
+				type={type}
+				placeholder={placeholder}
 				onChange={changeHandler}
 				onBlur={blurHandler}
-				value={inputState.value}
+				value={value}
 			/>
 		) : (
 			<textarea
-				id={props.id}
-				rows={props.rows || 3}
+				id={id}
+				rows={rows || 3}
 				onChange={changeHandler}
 				onBlur={blurHandler}
-				value={inputState.value}
+				value={value}
 			/>
 		)
 
-	const errorFeedback = !inputState.isValid && inputState.isTouched
+	const errorFeedback = !isValid && isTouched
 
 	return (
 		<div className={`form-control ${errorFeedback && "form-control--invalid"}`}>
