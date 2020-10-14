@@ -7,7 +7,7 @@ import "./NewPlace.css"
 const NewPlace = props => {
 	return (
 		<form className="place-form">
-			<Input id="place-name" element="input" type="text" label="Place Name" placeholder="New York" />
+			<Input id="place-name" element="input" type="text" label="Place Name" placeholder="New York" errorText="Please enter a valid name" />
 		</form>
 	)
 }
