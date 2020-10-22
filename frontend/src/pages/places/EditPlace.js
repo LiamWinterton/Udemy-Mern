@@ -52,7 +52,7 @@ const EditPlace = props => {
 	return (
 		<form className="place-form">
 			<Input
-				id="place-name"
+				id="name"
 				element="input"
 				type="text"
 				label="Place Name"
@@ -64,7 +64,7 @@ const EditPlace = props => {
 				valid={true}
 			/>
 			<Input
-				id="place-address"
+				id="address"
 				element="input"
 				type="text"
 				label="Address"
@@ -76,7 +76,7 @@ const EditPlace = props => {
 				valid={true}
 			/>
 			<Input
-				id="place-description"
+				id="description"
 				element="textarea"
 				rows={5}
 				label="Description"

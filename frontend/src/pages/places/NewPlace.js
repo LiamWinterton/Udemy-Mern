@@ -1,4 +1,7 @@
-import React, { useCallback, useReducer } from "react"
+import React from "react"
+
+// Hooks
+import { useForm } from "../../components/global/Hooks/form-hook"
 
 import Input from "../../components/global/FormElements/Input"
 import Button from "../../components/global/FormElements/Button"
@@ -7,62 +10,21 @@ import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from "../../util/validators"
 
 import "./PlaceForm.css"
 
-const formReducer = (state, action) => {
-	switch(action.type) {
-		case "INPUT_CHANGE":
-			let formIsValid = true
-
-			for(const inputID in state.inputs) {
-				if(inputID === action.id) {
-					formIsValid = formIsValid && action.isValid
-				} else {
-					formIsValid = formIsValid && state.inputs[inputID].isValid
-				}
-			}
-		
-			return {
-				...state,
-				inputs: {
-					...state.inputs,
-					[action.id]: {
-						value: action.value,
-						isValid: action.isValid
-					}
-				},
-				isValid: formIsValid
-			}
-		default:
-			return { ...state }
-	}
-}
-
 const NewPlace = props => {
-	const [formState, dispatch] =  useReducer(formReducer, {
-		inputs: {
-			"place-name": {
-				value: '',
-				isValid: false
-			},
-			"place-description": {
-				value: '',
-				isValid: false
-			},
-			"place-address": {
-				value: '',
-				isValid: false
-			}
+	const [formState, inputHandler] = useForm({
+		name: {
+			value: "",
+			isValid: false
 		},
-		isValid: false
-	})
-
-	// We use "useCallback" here because this function is defined IN the component.
-	// On a rerender, the function re-create, and loops would occur as its a "useEffect" dependency
-	// Update form state on input change
-	const inputHandler = useCallback((id, value, isValid) => {
-		dispatch({
-			type: "INPUT_CHANGE", value, isValid, id
-		})
-	}, [dispatch])
+		address: {
+			value: "",
+			isValid: false
+		},
+		description: {
+			value: "",
+			isValid: false
+		}
+	}, false)
 
 	const submitHandler = event => {
 		event.preventDefault()
@@ -73,7 +35,7 @@ const NewPlace = props => {
 	return (
 		<form className="place-form" onSubmit={submitHandler}>
 			<Input
-				id="place-name"
+				id="name"
 				element="input"
 				type="text"
 				label="Place Name"
@@ -83,7 +45,7 @@ const NewPlace = props => {
 				onInput={inputHandler}
 			/>
 			<Input
-				id="place-address"
+				id="address"
 				element="input"
 				type="text"
 				label="Address"
@@ -93,7 +55,7 @@ const NewPlace = props => {
 				onInput={inputHandler}
 			/>
 			<Input
-				id="place-description"
+				id="description"
 				element="textarea"
 				rows={5}
 				label="Description"
