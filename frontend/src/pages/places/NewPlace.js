@@ -46,6 +46,10 @@ const NewPlace = props => {
 			"place-description": {
 				value: '',
 				isValid: false
+			},
+			"place-address": {
+				value: '',
+				isValid: false
 			}
 		},
 		isValid: false
@@ -60,8 +64,14 @@ const NewPlace = props => {
 		})
 	}, [dispatch])
 
+	const submitHandler = event => {
+		event.preventDefault()
+
+		console.log(formState.inputs)
+	}
+
 	return (
-		<form className="place-form">
+		<form className="place-form" onSubmit={submitHandler}>
 			<Input
 				id="place-name"
 				element="input"
@@ -69,6 +79,16 @@ const NewPlace = props => {
 				label="Place Name"
 				placeholder="New York"
 				errorText="Please enter a valid name"
+				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
+				onInput={inputHandler}
+			/>
+			<Input
+				id="place-address"
+				element="input"
+				type="text"
+				label="Address"
+				placeholder="20 W 34th St, New York, NY 10001, United States"
+				errorText="Please enter a valid address"
 				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
 				onInput={inputHandler}
 			/>
