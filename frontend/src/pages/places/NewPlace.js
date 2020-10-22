@@ -51,8 +51,8 @@ const NewPlace = props => {
 		isValid: false
 	})
 
-	// We use "useCallback" here because the function is defined IN the component.
-	// On a rerender, the function we recreate, and loops would occur as its an "useEffect" dependency
+	// We use "useCallback" here because this function is defined IN the component.
+	// On a rerender, the function re-create, and loops would occur as its a "useEffect" dependency
 	// Update form state on input change
 	const inputHandler = useCallback((id, value, isValid) => {
 		dispatch({
