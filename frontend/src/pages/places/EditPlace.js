@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from "../../util/validators"
 
+import { useForm } from "../../components/global/Hooks/form-hook"
+
 import Button from "../../components/global/FormElements/Button"
 import Input from "../../components/global/FormElements/Input"
 
@@ -38,8 +40,25 @@ const dummyPlaces = [
 
 const EditPlace = props => {
 	const placeID = useParams().placeID
-
 	const filteredPlace = dummyPlaces.find(p => p.id === placeID)
+
+	const [formState, inputHandler] = useForm({
+		name: {
+			value: filteredPlace.name,
+			isValid: true
+		},
+		address: {
+			value: filteredPlace.address,
+			isValid: true
+		},
+		description: {
+			value: filteredPlace.description,
+			isValid: true
+		}
+	}, true)
+
+	console.log(inputHandler)
+	console.log(typeof inputHandler)
 
 	if(!filteredPlace) {
 		return (
@@ -59,9 +78,9 @@ const EditPlace = props => {
 				placeholder="New York"
 				errorText="Please enter a valid name"
 				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
-				onInput={() => false}
-				value={filteredPlace.title}
-				valid={true}
+				onInput={inputHandler}
+				value={formState.inputs.name.value}
+				valid={formState.inputs.name.isValid}
 			/>
 			<Input
 				id="address"
@@ -71,9 +90,9 @@ const EditPlace = props => {
 				placeholder="20 W 34th St, New York, NY 10001, United States"
 				errorText="Please enter a valid address"
 				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
-				onInput={() => false}
-				value={filteredPlace.address}
-				valid={true}
+				onInput={inputHandler}
+				value={formState.inputs.address.value}
+				valid={formState.inputs.address.isValid}
 			/>
 			<Input
 				id="description"
@@ -83,10 +102,10 @@ const EditPlace = props => {
 				placeholder="The Big Apple"
 				errorText="Descriptions must be atleast 10 characters long"
 				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(10)]}
-				value={filteredPlace.description}
-				onInput={() => false}
+				value={formState.inputs.description.value}
+				onInput={formState.inputs.description.isValid}
 			/>
-			<Button type="submit" disabled={true}>Update place</Button>
+			<Button type="submit" disabled={!formState.isValid}>Update place</Button>
 		</form>
 	)
 }

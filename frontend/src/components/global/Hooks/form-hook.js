@@ -45,7 +45,7 @@ export const useForm = (inputs, isValid) => {
 			isValid,
 			id
 		})
-	}, [dispatch])
+	}, [])
 
 	return [formState, inputHandler]
 }
