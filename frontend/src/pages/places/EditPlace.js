@@ -57,6 +57,12 @@ const EditPlace = props => {
 		}
 	}, true)
 
+	const onSubmitHandler = event => {
+		event.preventDefault()
+
+		console.log(formState.inputs)
+	}
+
 	if(!filteredPlace) {
 		return (
 			<div className="center">
@@ -66,7 +72,7 @@ const EditPlace = props => {
 	}
 
 	return (
-		<form className="place-form">
+		<form className="place-form" onSubmit={onSubmitHandler}>
 			<Input
 				id="name"
 				element="input"
