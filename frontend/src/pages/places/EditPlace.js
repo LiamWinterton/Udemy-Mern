@@ -44,7 +44,7 @@ const EditPlace = props => {
 
 	const [formState, inputHandler] = useForm({
 		name: {
-			value: filteredPlace.name,
+			value: filteredPlace.title,
 			isValid: true
 		},
 		address: {
@@ -56,9 +56,6 @@ const EditPlace = props => {
 			isValid: true
 		}
 	}, true)
-
-	console.log(inputHandler)
-	console.log(typeof inputHandler)
 
 	if(!filteredPlace) {
 		return (
@@ -102,8 +99,9 @@ const EditPlace = props => {
 				placeholder="The Big Apple"
 				errorText="Descriptions must be atleast 10 characters long"
 				validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(10)]}
+				onInput={inputHandler}
 				value={formState.inputs.description.value}
-				onInput={formState.inputs.description.isValid}
+				valid={formState.inputs.description.isValid}
 			/>
 			<Button type="submit" disabled={!formState.isValid}>Update place</Button>
 		</form>
