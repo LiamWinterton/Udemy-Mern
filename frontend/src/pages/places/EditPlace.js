@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from "../../util/validators"
 
-import { useForm } from "../../components/global/Hooks/form-hook"
+import { useForm } from "../../hooks/form-hook"
 
 import Button from "../../components/global/FormElements/Button"
 import Input from "../../components/global/FormElements/Input"

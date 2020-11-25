@@ -1,7 +1,7 @@
 import React from "react"
 
 // Hooks
-import { useForm } from "../../components/global/Hooks/form-hook"
+import { useForm } from "../../hooks/form-hook"
 
 import Input from "../../components/global/FormElements/Input"
 import Button from "../../components/global/FormElements/Button"
