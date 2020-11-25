@@ -26,7 +26,7 @@ const Input = props => {
 	// Manage State
 	const [inputState, dispatch] = useReducer(inputReducer, {
 		value: props.value || "",
-		isValid: false,
+		isValid: props.valid,
 		isTouched: false
 	})
 

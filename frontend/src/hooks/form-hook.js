@@ -36,7 +36,7 @@ export const useForm = (inputs, isValid) => {
 	})
 
 	// We use "useCallback" here because this function is defined IN the component.
-	// On a rerender, the function re-create, and loops would occur as its a "useEffect" dependency
+	// On a rerender, the function is re-created, and loops would occur if it's used as a changed dependency
 	// Update form state on input change
 	const inputHandler = useCallback((id, value, isValid) => {
 		dispatch({
